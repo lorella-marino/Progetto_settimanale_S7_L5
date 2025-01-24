@@ -17,7 +17,7 @@ const getProducts = () => {
         const card = `
               <div class="col-md-4">
   <div class="card mb-4 shadow-sm">
-    <img src="${product.imageUrl}" class="card-img-top img-fluid border border-secondary-subtle" style="height: 15rem; object-fit: cover;" alt="${product.name}" />
+    <img src="${product.imageUrl}" class="card-img-top img-fluid border-bottom border-secondary-subtle" style="height: 15rem; object-fit: cover;" alt="${product.name}" />
     <div class="card-body">
       <h5 class="card-title">${product.name}</h5>
       <p class="card-text">${product.description}</p>

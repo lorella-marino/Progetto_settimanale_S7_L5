@@ -14,12 +14,16 @@ const loadProductDetail = () => {
       .then((product) => {
         const container = document.getElementById("product-detail");
         container.innerHTML = `
-          <div class="container">
-            <div><img src="${product.imageUrl}" class="img-fluid mb-3 border border-info rounded-3" style="height: 25rem; object-fit: cover;" alt="${product.name}"></div>
-            <h2>${product.name}</h2>
-            <p>${product.description}</p>
-            <p><strong>Marca:</strong> ${product.brand}</p>
-            <p><strong>Prezzo:</strong> €${product.price}</p>
+          <div class="container d-flex flex-row p-0">
+           <div class="container">
+            <div class="row d-flex flex-column text-start ">
+             <h2 class="text-white">${product.name}</h2>
+             <p class="text-white">${product.description}</p>
+             <p class="text-white"><strong>Marca:</strong> ${product.brand}</p>
+             <p class="text-white"><strong>Prezzo:</strong> €${product.price}</p>
+            </div>
+           </div>
+           <div class="w-100 align-self-end"><img src="${product.imageUrl}" class="img-fluid mb-3 border border-info rounded-3" style="object-fit: cover;" alt="${product.name}"></div>
           </div>
         `;
       })
