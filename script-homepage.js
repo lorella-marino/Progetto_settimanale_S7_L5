@@ -4,6 +4,11 @@ const TOKEN =
 
 // Funzione per ottenere i prodotti (GET)
 const getProducts = () => {
+  const loadingIndicator = document.getElementById("loading-indicator");
+
+  // Mostra l'indicatore di caricamento
+  loadingIndicator.style.display = "inline-block";
+
   fetch(API_URL, {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
@@ -16,24 +21,28 @@ const getProducts = () => {
       products.forEach((product) => {
         const card = `
           <div class="col">
-            <div class="card mb-4 shadow-sm h-100" >
+            <div class="card mb-4 shadow-sm h-100 bg-info" >
               <a href="detail.html?id=${product._id}">
-                <img src="${product.imageUrl}" class="card-img-top img-fluid border border-info" style="height: 15rem; object-fit: cover;" alt="${product.name}" />
+                <img src="${product.imageUrl}" class="card-img-top img-fluid " style="height: 15rem; object-fit: cover;" alt="${product.name}" />
               </a>
-              <div class="card-body ">
+              <div class="card-body d-flex flex-column">
                 <h5 class="card-title">${product.name}</h5>
                 <p class="text-muted">Prezzo: €${product.price}</p>
+              <div class="mt-auto">
+                  <button class="btn btn-dark text-white me-2 " onclick="editProduct('${product._id}')">Modifica</button>
+                  <button class="btn btn-link text-dark p-0" onclick="scopri('${product._id}')">Scopri di più</button>
               </div>
-              <div class="card-body">
-                  <button class="btn btn-info text-white me-2 " onclick="editProduct('${product._id}')">Modifica</button>
-                  <button class="btn btn-link text-info p-0" onclick="scopri('${product._id}')">Scopri di più</button>
               </div>
             </div>
           </div>`;
         container.innerHTML += card;
       });
     })
-    .catch((err) => console.error("Errore nel caricamento prodotti:", err));
+    .catch((err) => console.error("Errore nel caricamento prodotti:", err))
+    .finally(() => {
+      // Nascondi l'indicatore di caricamento
+      loadingIndicator.style.display = "none";
+    });
 };
 
 // Funzione per modificare un prodotto (reindirizza al backoffice)
